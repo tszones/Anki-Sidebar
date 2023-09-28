@@ -128,6 +128,13 @@ export class AnkiViewViewProvider implements vscode.WebviewViewProvider {
 		return showButton ? `<p></p>${ctrlHtml}<p></p>${cardHtml}` : cardHtml;
 	}
 
+	private removeColorAndBackground(html: string) {
+		// Remove the color and backgroundColor properties using regular expressions
+		let newHtml = html.replaceAll(/(background|background-color|color)\s*:[^;}]+;?/gi, '');
+
+		return newHtml
+	}
+
 	public async showAnswer() {
 		// console.log("CodeView: showAnswer");
 		try {
@@ -137,15 +144,13 @@ export class AnkiViewViewProvider implements vscode.WebviewViewProvider {
 			let html = card.result.answer;
 			let ankiHtml = await this.replaceResource(html);
 
-
 			this.ankiHtml = ankiHtml;
 
-			// Remove the color and backgroundColor properties using regular expressions
-			ankiHtml = ankiHtml.replace(/(background|background-color|color):\s*[^;]+;/gi, '');
-			
+			const newAnkiHtml = this.removeColorAndBackground(ankiHtml)
+
 			let cardHtml = `
 			<anki class="ankiview-answer">
-			${ankiHtml}
+			${newAnkiHtml}
 			</anki>
 			`;
 			let ctrlHtml = `
@@ -175,12 +180,11 @@ export class AnkiViewViewProvider implements vscode.WebviewViewProvider {
 
 			this.ankiHtml = ankiHtml;
 
-			// Remove the color and backgroundColor properties using regular expressions
-			ankiHtml = ankiHtml.replace(/(background|background-color|color):\s*[^;]+;/gi, '');
+			const newAnkiHtml = this.removeColorAndBackground(ankiHtml)
 
 			let cardHtml = `
 			<anki class="ankiview-question">
-			${ankiHtml}
+			${newAnkiHtml}
 			</anki>
 			`;
 			let ctrlHtml = `
