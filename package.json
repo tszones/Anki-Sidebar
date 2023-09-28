@@ -1,0 +1,233 @@
+{
+  "name": "ankiview",
+  "displayName": "Anki View",
+  "description": "Show Anki in vscode.",
+  "icon": "market/icon_128.png",
+  "version": "0.0.8",
+  "engines": {
+    "vscode": "^1.78.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "publisher": "feilong",
+  "repository": "https://github.com/feilongfl/ankiview-vscode",
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true,
+      "description": "ankiview can work in untrusted workspace"
+    }
+  },
+  "contributes": {
+    "views": {
+      "explorer": [
+        {
+          "type": "webview",
+          "id": "ankiview.view.sideview",
+          "name": "Anki"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "ankiview.command.sideview.insertMarkDown",
+          "when": "view == 'ankiview.view.sideview'",
+          "group": "navigation"
+        },
+        {
+          "command": "ankiview.command.sideview.showQuestion",
+          "when": "view == 'ankiview.view.sideview'",
+          "group": "navigation"
+        },
+        {
+          "command": "ankiview.Miscellaneous.Sync",
+          "when": "view == 'ankiview.view.sideview'",
+          "group": "navigation"
+        }
+      ],
+      "webview/context": [
+        {
+          "command": "ankiview.Miscellaneous.Sync",
+          "when": "webviewId == 'ankiview.view.sideview'",
+          "group": "ankiview"
+        },
+        {
+          "command": "ankiview.command.sideview.openDeck",
+          "when": "webviewId == 'ankiview.view.sideview'",
+          "group": "ankiview"
+        },
+        {
+          "command": "ankiview.command.sideview.showQuestion",
+          "when": "webviewId == 'ankiview.view.sideview'",
+          "group": "ankiview"
+        },
+        {
+          "command": "ankiview.command.sideview.showAnswer",
+          "when": "webviewId == 'ankiview.view.sideview'",
+          "group": "ankiview"
+        },
+        {
+          "command": "ankiview.command.sideview.answerCard",
+          "when": "webviewId == 'ankiview.view.sideview'",
+          "group": "ankiview"
+        },
+        {
+          "command": "ankiview.command.sideview.undo",
+          "when": "webviewId == 'ankiview.view.sideview'",
+          "group": "ankiview"
+        },
+        {
+          "command": "ankiview.command.sideview.insertMarkDown",
+          "title": "AnkiView: Insert Markdown into Documents."
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "ankiview.Miscellaneous.Version",
+        "title": "AnkiView: ping server"
+      },
+      {
+        "command": "ankiview.Miscellaneous.Sync",
+        "title": "AnkiView: sync",
+        "icon": {
+          "light": "./resources/light/sync.svg",
+          "dark": "./resources/dark/sync.svg"
+        }
+      },
+      {
+        "command": "ankiview.command.sideview.openDeck",
+        "title": "AnkiView: Open deck"
+      },
+      {
+        "command": "ankiview.command.sideview.showQuestion",
+        "title": "AnkiView: Sideview Show Question",
+        "icon": {
+          "light": "./resources/light/refresh.svg",
+          "dark": "./resources/dark/refresh.svg"
+        }
+      },
+      {
+        "command": "ankiview.command.sideview.insertMarkDown",
+        "title": "AnkiView: Insert Markdown into Documents.",
+        "icon": {
+          "light": "./resources/light/insert.svg",
+          "dark": "./resources/dark/insert.svg"
+        }
+      },
+      {
+        "command": "ankiview.command.sideview.showAnswer",
+        "title": "AnkiView: Sideview Show Answer"
+      },
+      {
+        "command": "ankiview.command.sideview.answerCard",
+        "title": "AnkiView: Sideview Answer Card"
+      },
+      {
+        "command": "ankiview.command.sideview.undo",
+        "title": "AnkiView: Undo"
+      },
+      {
+        "command": "ankiview.command.sideview.answerCardEase1",
+        "title": "AnkiView: Sideview Answer Card: Ease 1"
+      },
+      {
+        "command": "ankiview.command.sideview.answerCardEase2",
+        "title": "AnkiView: Sideview Answer Card: Ease 2"
+      },
+      {
+        "command": "ankiview.command.sideview.answerCardEase3",
+        "title": "AnkiView: Sideview Answer Card: Ease 3"
+      },
+      {
+        "command": "ankiview.command.sideview.answerCardEase4",
+        "title": "AnkiView: Sideview Answer Card: Ease 4"
+      }
+    ],
+    "configuration": [
+      {
+        "title": "AnkiView",
+        "type": "object",
+        "properties": {
+          "ankiview.api": {
+            "type": "string",
+            "default": "http://localhost:8765",
+            "description": "AnkiConnect listen address"
+          },
+          "ankiview.showButton": {
+            "type": "boolean",
+            "default": true,
+            "description": "Show answer button"
+          },
+          "ankiview.TimeBar.warnThreshold": {
+            "type": "number",
+            "default": 0.66,
+            "description": "Warning time multiplier (need reload)"
+          }
+        }
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "ankiview.command.sideview.answerCardEase1",
+        "key": "ctrl+alt+1"
+      },
+      {
+        "command": "ankiview.command.sideview.answerCardEase2",
+        "key": "ctrl+alt+2"
+      },
+      {
+        "command": "ankiview.command.sideview.answerCardEase3",
+        "key": "ctrl+alt+3"
+      },
+      {
+        "command": "ankiview.command.sideview.answerCardEase4",
+        "key": "ctrl+alt+4"
+      },
+      {
+        "command": "ankiview.command.sideview.showAnswer",
+        "key": "ctrl+alt+`"
+      },
+      {
+        "command": "ankiview.command.sideview.undo",
+        "key": "ctrl+alt+z"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "vup": "npm version patch --git-tag-version false && git cliff --exclude-path CHANGELOG.md --exclude-path package.json --exclude-path package-lock.json --latest -o CHANGELOG.md --unreleased --tag $(jq -r .version package.json) && git commit -a -m 'vup: v'$(jq -r .version package.json) && git tag -a $(jq -r .version package.json) -m 'auto update version number'",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "~20.1.7",
+    "@types/vscode": "^1.78.0",
+    "@typescript-eslint/eslint-plugin": "^5.59.6",
+    "@typescript-eslint/parser": "^5.59.6",
+    "@vscode/test-electron": "^2.3.2",
+    "eslint": "^8.40.0",
+    "glob": "^8.1.0",
+    "mocha": "^10.2.0",
+    "ts-loader": "^9.4.2",
+    "typescript": "^5.0.4",
+    "webpack": "^5.82.1",
+    "webpack-cli": "^5.1.1"
+  },
+  "dependencies": {
+    "axios": "^1.4.0",
+    "p-limit": "^4.0.0",
+    "turndown": "^7.1.2"
+  }
+}
