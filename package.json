@@ -1,23 +1,22 @@
 {
-  "name": "ankiview",
-  "displayName": "Anki View",
-  "description": "Show Anki in vscode.",
-  "icon": "market/icon_128.png",
-  "version": "0.0.8",
+  "name": "anki",
+  "displayName": "Anki",
+  "description": "Show Anki in VSCode.",
+  "icon": "market/icon.png",
+  "version": "1.0.0",
   "engines": {
     "vscode": "^1.78.0"
   },
   "categories": [
     "Other"
   ],
-  "publisher": "feilong",
-  "repository": "https://github.com/feilongfl/ankiview-vscode",
+  "publisher": "codeColajs",
   "activationEvents": [],
   "main": "./dist/extension.js",
   "capabilities": {
     "untrustedWorkspaces": {
       "supported": true,
-      "description": "ankiview can work in untrusted workspace"
+      "description": "Anki can function within an untrusted workspace."
     }
   },
   "contributes": {
@@ -200,6 +199,7 @@
   "scripts": {
     "vscode:prepublish": "npm run package",
     "compile": "webpack",
+    "dev": "webpack",
     "watch": "webpack --watch",
     "package": "webpack --mode production --devtool hidden-source-map",
     "compile-tests": "tsc -p . --outDir out",
@@ -207,7 +207,8 @@
     "pretest": "npm run compile-tests && npm run compile && npm run lint",
     "lint": "eslint src --ext ts",
     "vup": "npm version patch --git-tag-version false && git cliff --exclude-path CHANGELOG.md --exclude-path package.json --exclude-path package-lock.json --latest -o CHANGELOG.md --unreleased --tag $(jq -r .version package.json) && git commit -a -m 'vup: v'$(jq -r .version package.json) && git tag -a $(jq -r .version package.json) -m 'auto update version number'",
-    "test": "node ./out/test/runTest.js"
+    "test": "node ./out/test/runTest.js",
+    "build": "vsce package"
   },
   "devDependencies": {
     "@types/glob": "^8.1.0",
