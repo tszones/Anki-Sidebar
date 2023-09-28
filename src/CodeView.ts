@@ -129,9 +129,13 @@ export class AnkiViewViewProvider implements vscode.WebviewViewProvider {
 	}
 
 	private removeColorAndBackground(html: string) {
-		// Remove the color and backgroundColor properties using regular expressions
-		let newHtml = html.replaceAll(/(background|background-color|color)\s*:[^;}]+;?/gi, '');
 
+		// Remove the color and backgroundColor properties using regular expressions
+		// 只匹配 Style 中的 background 和 color
+		let newHtml = html.replace(/<style>(.*?)<\/style>/gis, (match, group) => {
+			return match.replace(/(background|background-color|color)\s*:[^;}]+;?/gi, '');
+		});
+		  
 		return newHtml
 	}
 
