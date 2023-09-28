@@ -141,8 +141,7 @@ export class AnkiViewViewProvider implements vscode.WebviewViewProvider {
 			this.ankiHtml = ankiHtml;
 
 			// Remove the color and backgroundColor properties using regular expressions
-			ankiHtml = ankiHtml.replace(/color\s*:\s*#[A-Za-z0-9]+;?/g, '');
-			ankiHtml = ankiHtml.replace(/background-color\s*:\s*#[A-Za-z0-9]+;?/g, '');
+			ankiHtml = ankiHtml.replace(/(background|background-color|color):\s*[^;]+;/gi, '');
 			
 			let cardHtml = `
 			<anki class="ankiview-answer">
@@ -177,8 +176,7 @@ export class AnkiViewViewProvider implements vscode.WebviewViewProvider {
 			this.ankiHtml = ankiHtml;
 
 			// Remove the color and backgroundColor properties using regular expressions
-			ankiHtml = ankiHtml.replace(/color\s*:\s*#[A-Za-z0-9]+;?/g, '');
-			ankiHtml = ankiHtml.replace(/background-color\s*:\s*#[A-Za-z0-9]+;?/g, '');
+			ankiHtml = ankiHtml.replace(/(background|background-color|color):\s*[^;]+;/gi, '');
 
 			let cardHtml = `
 			<anki class="ankiview-question">

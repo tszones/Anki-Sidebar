@@ -1,7 +1,7 @@
 {
-  "name": "anki",
-  "displayName": "Anki",
-  "description": "Show Anki in VSCode.",
+  "name": "ankisidebar",
+  "displayName": "Anki Sidebar",
+  "description": "Anki Sidebar seamlessly integrates Anki flashcard learning into VSCode, making it easier than ever to review and memorize your cards while coding.",
   "icon": "market/icon.png",
   "version": "1.0.0",
   "engines": {
