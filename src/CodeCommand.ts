@@ -91,7 +91,7 @@ class SideviewOpenDeck extends VscodeCommand {
     protected async callback() {
         const limit = pLimit(5); // anki-connect max concurrency: 5
         let deckNames = await this.ankiProvider.getDecks();
-        let decks = Promise.all(deckNames.map(d => limit(async () => (new DeckQuickPickItem(this._ankiConnect, d)).get())));
+        let decks = Promise.all(deckNames.map((d:any) => limit(async () => (new DeckQuickPickItem(this._ankiConnect, d)).get())));
 
         let deck = await vscode.window.showQuickPick(decks);
         if (deck !== undefined) {

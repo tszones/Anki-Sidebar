@@ -54,12 +54,14 @@ export class AnkiViewViewProvider implements vscode.WebviewViewProvider {
 	}
 
 	private async convertHtmlToMarkdown() {
-		let turndownService = new TurndownService();
 
-		// remove <style></style>
 		let pureHTML = this.ankiHtml.replace(/<style[\s\S]*?<\/style>/g, '');
 
+		let turndownService = new TurndownService()
+
+
 		let markdownContent = turndownService.turndown(pureHTML);
+
 		return markdownContent;
 	}
 
@@ -301,20 +303,33 @@ export class AnkiViewViewProvider implements vscode.WebviewViewProvider {
 
 
 	public async insertMarkDown() {
-		const editor = vscode.window.activeTextEditor;
+		try {
+			const editor = vscode.window.activeTextEditor;
+	
+			let markDownContent = await this.convertHtmlToMarkdown();
 
-		let markDownContent = await this.convertHtmlToMarkdown();
 
-
-		if (typeof markDownContent !== 'string') {
-			markDownContent = "";
-		}
-
-		if (editor) {
-			const currentPosition = editor.selection.active;
-			editor.edit((editBuilder) => {
-				editBuilder.insert(currentPosition, markDownContent);
-			});
+			console.log(markDownContent)
+	
+			if (typeof markDownContent !== 'string') {
+				markDownContent = "";
+			}
+	
+			if (editor) {
+				const currentPosition = editor.selection.active;
+				editor.edit((editBuilder) => {
+					editBuilder.insert(currentPosition, markDownContent);
+				});
+			}
+		} catch (error) {
+			if (error instanceof Error) {
+				// 处理错误对象
+				vscode.window.showErrorMessage("发生错误：" + error.message);
+			} else {
+				// 处理非错误对象的错误情况
+				vscode.window.showErrorMessage("发生错误：" + error);
+			}
 		}
 	}
+	
 }
