@@ -1,5 +1,7 @@
 # Anki Sidebar
 
+- [English](./README.md)
+
 ## 简介
 
 Anki 背诵助手是一个为 [Anki](https://apps.ankiweb.net/) 用户设计的 VSCode 插件，它旨在帮助你更轻松地背诵 Anki 卡片。通过与 Anki 数据库的集成，该插件使你可以在 VSCode 中背诵卡片，以提高学习效率。
@@ -8,7 +10,7 @@ Anki 背诵助手是一个为 [Anki](https://apps.ankiweb.net/) 用户设计的 
 
 ## 示例
 
-![示例图](screenshot.png)
+![示例图](assets/image.png)
 
 ## 依赖项
 
