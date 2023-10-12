@@ -104,15 +104,24 @@ export class AnkiViewViewProvider implements vscode.WebviewViewProvider {
 
 	private async replaceResource(html: string) {
 		let images = Array.from(html.matchAll(/img src="(.*?)"/g)).map((v, _) => v[1]);
-		let imageData = images.map(async (v) => this._ankiConnect.api.media.retrieveMediaFile(v));
 
 		for (let index = 0; index < images.length; index++) {
-			let img = await imageData[index];
-			html = html.replace(images[index], `data:image/png;base64, ` + img.result);
+		  let imageUrl = images[index];
+	  
+		  // 检查URL是否以 http:// 或 https:// 开头
+		  if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
+			// 如果是外部HTTP图片，跳过Base64处理
+			continue;
+		  }
+	  
+		  // 处理本地图片
+		  let img = await this._ankiConnect.api.media.retrieveMediaFile(imageUrl);
+		  html = html.replace(images[index], `data:image/png;base64, ` + img.result);
 		}
-
+	  
 		return `<div class="card ankiview">${html}</div>`;
-	}
+	  }
+	  
 
 	public async getDecks() {
 		return (await this._ankiConnect.api.deck.deckNames()).result;
