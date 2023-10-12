@@ -3,7 +3,7 @@
   "displayName": "Anki Sidebar",
   "description": "Anki Sidebar seamlessly integrates Anki flashcard learning into VSCode, making it easier than ever to review and memorize your cards while coding.",
   "icon": "market/icon.png",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "engines": {
     "vscode": "^1.78.0"
   },
